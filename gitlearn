@@ -54,3 +54,27 @@ git reset HEAD <file name>
 1. 我们删除了工作区的文件之后,使用git status就可以看见说一个文件被删除.我们可以使用git rm <file name>来删除版本库中文件,然后进行提交就可以
 2. 如果我们误删了工作区中的文件,我们可以使用git checkout -- <file name>来回复文件.git checkout其实是用版本库里的版本替换工作区的版本,无论工作区的文件删除还是修改都是可以进行还原的.
 
+
+
+
+添加远程库
+在github上添加一个仓库(仓库名为learngit),目前在github上这个仓库是空的.
+在本地的仓库下运行:git remote add origin git@github.com:sunLookin/learngit.git
+这里的sunLookin是自己的Github账户名.
+然后执行git push -u origin master(把本地库的内容推送到远程库)
+git push实际上是把当前分支master推送到远程(我们第一次推送master分支时,加上-u参数,Git不但会把本地的master分支内容推送到远程新的master分支,还会把本地的master分支和远程的master分支关联起来,在以后的推送或者拉取时就可以简化命令)
+所以在往后的提交,就只需要git push origin master
+注意:在此出现的一些问题:
+1. SSH警告:这是因为Git使用ssh链接,而SSH链接在第一次验证Github服务器的Key时,需要你确认Github的Kry的指纹信息是否来自Github服务器,输入yes就行.
+2. 公钥问题.
+执行 cd ~./ssh
+查看是否有id_rsa.pub和id_rsa文件存在,如果不存在,执行第三步,如果有,直接执行第4步
+3. ssh-keygen -t rsa -C "your Github name"(-t指定密钥类型,默认是rsa,-C设置注释文字,-f指定密钥文件储存的文件名)
+4. 其中id_rsa.pub里面就是公钥,将其拷贝到github的setting中的SSH KEY中即可.
+5. 验证,在终端输入ssh -T git@github.com(出现
+Hi username! You've successfully authenticated, but GitHub does not provide shell access则成功,就可以push本地的仓库到github的仓库了)
+
+
+从远程克隆
+git clone git@github.com:subLookin/project.git
+
