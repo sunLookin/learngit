@@ -1,4 +1,11 @@
-Git is a version control system
-Git is a free software distributed under the GPL
-Git has a mutable index called stage.
-still SVN
+temp.py
+功能:在终端输入一串数字,彼此相邻的数字取出为一组.
+实现效果:
+输入:3333332323333334333344
+输出:['33', '33', '33', '33', '33', '32', '23', '32', '23', '33', '33', '33', '33', '33', '34', '43', '33', '33', '33', '34', '44']
+数值32的个数为2
+数值33的个数为13
+数值34的个数为2
+数值43的个数为1
+数值44的个数为1
+数值23的个数为2
