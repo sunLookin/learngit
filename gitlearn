@@ -12,7 +12,7 @@
 git config --global user.name "your name"
 git config --global user.email "your email"
 )
-//为什么git添加文件需要add和commit,因为commit可以一次提交很多文件,所以你可以多次add不同的文件
+//为什么git添加文件需要add和commit,因为commit可以一次提交很多文件,所以你可以多次add不同的文件,后面会有详细说明
 
 
 
@@ -76,7 +76,7 @@ Hi username! You've successfully authenticated, but GitHub does not provide shel
 
 
 从远程克隆
-git clone git@github.com:subLookin/project.git
+git clone git@github.com:sunLookin/project.git
 
 
 创建与合并分支
@@ -93,3 +93,31 @@ git clone git@github.com:subLookin/project.git
 合并某分支到当前分支:git merge <name>
 删除分支:git branch -d <name>
 <name>指的是分支的名字
+
+
+
+分支管理策略
+通常情况下,合并分支时,如果可能,Git会用fast forward模式,但这种情况下,删除分支后,会丢掉分支信息.
+如果要强制禁止Fast forward模式,Git就会在Merge时生成一个新的commit,这样,从分支历史上就可以看出分支信息.--no--ff
+1. 创建一个新的分支(git checkout -b foo)
+2. 修改新的分支中的某个文件,然后进行add和commit
+3. 切换到master分支上(git checkout master),我们进行合并
+4. 使用git megre --no--ff -m "describe message"
+(因为本次的合并要创建一个新的commit,所以加上-m参数,把描述写进去)
+5. 使用git log --graph --pretty-oneline --abbrev-commit查看分支历史
+分支策略:
+在实际的开发中,我们应该按照几个基本原则进行分支管理
+1. master分支应该保持稳定,也就是用来发布新版本,平时不应该在上面进行修改
+2. 干活都应该放在其他的分支上面,也就是说其他的分支是不稳定的,需要发布版本的时候,再把其他分支合并到master上.
+
+
+bug分支
+假设我们突然想修改一个master分支上的bug,但是我们的dev分支任务没有完成,怎么处理?
+1. 我们在dev分支下面将我们的东西储存起来,使用git stash
+2. 跳转到master分支上,创建一个新的临时的分支来进行bug修改,修改完成后我们提交上去并合并就可以了.
+3. 我们怎么回复之前在dev中储存的工作呢,两种方法:第一种:git stash apply恢复,但是恢复后,stash内容没有删除,需要执行git stash drop来进行删除.第二种:直接使用git stash pop进行恢复和删除.
+4. 使用git stash list 来查看stash里面的情况
+
+
+
+
