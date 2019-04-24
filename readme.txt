@@ -10,4 +10,4 @@ temp.py
 数值44的个数为1
 数值23的个数为2
 程序结束!
-Create a new branch is quick
+Create a new branch is quick AND simple
