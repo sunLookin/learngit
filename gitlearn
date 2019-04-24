@@ -120,4 +120,25 @@ bug分支
 
 
 
+多人协作
+查看远程库信息:git remote -v
+本地新建的分支如果不推送是看不见的
+从本地推送分支,使用git push origin branch-name,如果推送失败,先用git pull抓取远程的新提交
+在本地创建和远程分支对应的分支,使用git checkout -b dev origin/dev
+建立本地分支和远程分支的关联,使用git checkout --set-upstream branch-name origin/branch-name
+从远程抓取分支,使用git pull.
 
+
+
+创建标签:
+使用命令git tag <tagname>来新建一个标签,默认是HEAD,也可以指定commit id,
+使用git tag -a<tagname> -m "describe"可以制定标签信息
+命令git tag可以查看标签信息
+命令git show <tagname>查看某个tag信息
+
+
+操作标签
+git push origin <tagname>推送一个tag到远程
+git push origin --tags推送本地全部的tag到远程
+git tag -d <tagname> 删除本地的一个tag
+git push origin :refs/tags/<tagname> 可以删除一个远程的tag,但是删除远程的前提是必须删除本地的相应tag
